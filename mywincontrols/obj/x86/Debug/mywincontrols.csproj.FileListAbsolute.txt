@@ -1,0 +1,11 @@
+D:\Proj2\core\mywincontrols\bin\Debug\mywincontrols.exe.config
+D:\Proj2\core\mywincontrols\obj\x86\Debug\MyWinControls.frmSearchBox.resources
+D:\Proj2\core\mywincontrols\obj\x86\Debug\MyWinControls.ucDuration.resources
+D:\Proj2\core\mywincontrols\obj\x86\Debug\MyWinControls.ucFileSelector.resources
+D:\Proj2\core\mywincontrols\obj\x86\Debug\mywincontrols.csproj.GenerateResource.Cache
+D:\Proj2\core\mywincontrols\obj\x86\Debug\MyWinControls.frmRPT_Viewer.resources
+D:\Proj2\output\mywincontrols\mywincontrols.dll.config
+D:\Proj2\output\mywincontrols\mywincontrols.dll
+D:\Proj2\output\mywincontrols\mywincontrols.pdb
+D:\Proj2\core\mywincontrols\obj\x86\Debug\mywincontrols.dll
+D:\Proj2\core\mywincontrols\obj\x86\Debug\mywincontrols.pdb
