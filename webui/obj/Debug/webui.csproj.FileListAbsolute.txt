@@ -14,6 +14,6 @@ D:\proj2\core\webui\bin\Debug\System.Net.Http.xml
 D:\proj2\core\webui\bin\Debug\System.Net.Http.Formatting.xml
 D:\proj2\output\webui\webui.dll
 D:\proj2\output\webui\webui.pdb
-D:\proj2\core\webui\obj\Debug\webui.csprojResolveAssemblyReference.cache
 D:\proj2\core\webui\obj\Debug\webui.dll
 D:\proj2\core\webui\obj\Debug\webui.pdb
+D:\proj2\core\webui\obj\Debug\webui.csprojResolveAssemblyReference.cache

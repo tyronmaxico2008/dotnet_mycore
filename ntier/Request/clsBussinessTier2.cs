@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Specialized;
 using System.Xml;
 using System.Data;
+using System.Web;
 namespace NTier.Request
 {
 
@@ -256,7 +257,7 @@ namespace NTier.Request
                     case "delete":
 
 
-                        var objDelete = new clsRequestCommand_save();
+                        var objDelete = new clsRequestCommand_delete();
                         objDelete.crudName = sCRUDName;
                         setValidationFrom_Node(xNode, objDelete.oValidation);
                         objDelete.setTier(this);
@@ -443,15 +444,26 @@ namespace NTier.Request
             return clnAppSettings[sKey];
         }
 
-        public void setCookie(string sKey, string sVal)
+        public void setCookie(string sKey, string sValue)
         {
-            throw new NotImplementedException();
+            HttpCookie myUserCookie = new HttpCookie(sKey);
+
+            myUserCookie.Value = sValue;
+
+            //if (_AppName.isEmpty() == false)
+            //    myUserCookie.Path = "~/apps/" + _AppName;
+
+            HttpContext.Current.Response.Cookies.Add(myUserCookie);
         }
 
         public string getCookie(string sKey)
         {
-            throw new NotImplementedException();
+            if (HttpContext.Current.Request.Cookies.AllKeys.Contains(sKey))
+                return HttpContext.Current.Request.Cookies[sKey].Value;
+            else
+                return "";
         }
+
 
         public CRUD.clsCRUD getCRUD(string sCRUDName)
         {

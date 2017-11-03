@@ -166,18 +166,24 @@ namespace NTier.Request
         {
             var obj = new NTier.Request.clsGetDataView(_adapter);
 
-            NTier.Request.iGetData iCmd = AppDomain.CurrentDomain.CreateInstance(this.assemblyName, this.classPath).Unwrap() as iGetData;
-            iCmd.setTier(this._tier);
 
-            if (!this.func.isEmpty())
+
+            if (this.func.isEmpty() == false)
             {
+                NTier.Request.iRequest iCmd = AppDomain.CurrentDomain.CreateInstance(this.assemblyName, this.classPath).Unwrap() as iRequest;
+                iCmd.setTier(this._tier);
+
                 object[] objParams = new object[] { cmd };
                 var m = iCmd.GetType().GetMethod(this.func);
                 clsMsg msg = (clsMsg)m.Invoke(iCmd, objParams);
                 return msg;
             }
             else
+            {
+                NTier.Request.iGetData iCmd = AppDomain.CurrentDomain.CreateInstance(this.assemblyName, this.classPath).Unwrap() as iGetData;
+                iCmd.setTier(this._tier);
                 return iCmd.getData(cmd);
+            }
 
             return g.msg("", obj.getData(cmd));
         }
@@ -185,7 +191,7 @@ namespace NTier.Request
 
 
 
-    
+
     internal abstract class clsRequestFileData_Base : clsRequest
     {
         public abstract override clsMsg validate(clsCmd cmd);
@@ -253,9 +259,8 @@ namespace NTier.Request
             }
 
         }
-
-
     }
+
 
     internal class clsRequestCommand_delete : clsRequestCommandBase
     {
@@ -317,20 +322,21 @@ namespace NTier.Request
             var msg = validate(cmd);
             if (msg.Validated == false) return msg;
 
-
-            NTier.Request.iCommand iCmd = _assembly.createInstance(this.AssemblyName, this.classPath) as iCommand;
-
-            iCmd.setTier(_tier);
-
             if (!func.isEmpty())
             {
+                NTier.Request.iRequest oReq = _assembly.createInstance(this.AssemblyName, this.classPath) as iRequest;
+                oReq.setTier(_tier);
                 object[] objParams = new object[] { cmd };
-                var m = iCmd.GetType().GetMethod(func);
-                msg = (clsMsg)m.Invoke(iCmd, objParams);
+                var m = oReq.GetType().GetMethod(func);
+                msg = (clsMsg)m.Invoke(oReq, objParams);
                 return msg;
             }
             else
-                return iCmd.exec(cmd);
+            {
+                NTier.Request.iCommand oCmd = _assembly.createInstance(this.AssemblyName, this.classPath) as iCommand;
+                oCmd.setTier(_tier);
+                return oCmd.exec(cmd);
+            }
         }
 
 
@@ -455,7 +461,7 @@ namespace NTier.Request
                 rpt.downloadName = this.downloadName;
                 return rpt;
             }
-            
+
             return null;
 
         }

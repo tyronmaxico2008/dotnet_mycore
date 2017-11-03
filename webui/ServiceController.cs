@@ -200,9 +200,6 @@ namespace webui
         public ContentResult getdataAll(FormCollection frm)
         {
 
-            string sFormData = string.Join(",", frm.AllKeys) ;
-            System.IO.File.WriteAllText("d:\\frm.txt",frm.Count.ToString());
-
             var cmd = new clsCmd();
             addParamFromPost(cmd, frm);
 
@@ -211,17 +208,18 @@ namespace webui
 
 
             DataTable t = null;
+
             if (oRequestInfo.Path.StartsWith("drp\\"))
                 t = getTier(oRequestInfo.appName).getDropDownData(oRequestInfo.Path.Substring(4), cmd).Obj as DataTable;
             else
-                t = getTier(oRequestInfo.appName).getData(spath, cmd).Obj as DataTable;
-
+                t = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd).Obj as DataTable;
 
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(t), "application/json");
         }
 
 
 
+        //this is not required later on delete this code.
 
         public ContentResult getdataPaging_vue(FormCollection frm)
         {
