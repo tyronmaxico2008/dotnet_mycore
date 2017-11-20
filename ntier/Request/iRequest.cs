@@ -29,8 +29,6 @@ namespace NTier.Request
 
     public interface iGetSQLReport : iRequest
     {
-
-
         sqlReport.iSQLReport getReport(clsCmd cmd);
     }
 
@@ -230,9 +228,7 @@ namespace NTier.Request
 
     internal class clsRequestCommand_save : clsRequestCommandBase
     {
-
         public string crudName { get; set; }
-
 
         public override clsMsg validate(clsCmd cmd)
         {

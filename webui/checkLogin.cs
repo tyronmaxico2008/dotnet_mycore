@@ -12,12 +12,13 @@ namespace webui
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
-            if (g.parseInt(ui.oTier.getCookie("userid")) == 0)
-            {
-                filterContext.Result = new RedirectResult(ui.getAppSettings("loginPage"));
-                base.OnActionExecuting(filterContext);
-                return;
-            }
+            //if (g.parseInt(ui.oTier.getCookie("userid")) == 0)
+            //{
+            //    filterContext.Result = new RedirectResult(ui.getAppSettings("loginPage"));
+            //    base.OnActionExecuting(filterContext);
+                
+            //    return;
+            //}
 
 
             //if (_oBL.isAuthorized(ModuleName, OperationName) == false)

@@ -17,9 +17,9 @@ namespace NTier.Request
         }
 
 
-        public static iBussinessTier createBussinessTierFromXmlForWeb2(clsAppServerBase oAppServerInfo,string sMainAppName)
+        public static iBussinessTier createBussinessTierFromXmlForWeb2(clsAppServerBase oAppServerInfo,string sMainApp)
         {
-            clsBussinessTier2 obj = new clsBussinessTier2(oAppServerInfo, sMainAppName);
+            clsBussinessTier2 obj = new clsBussinessTier2(oAppServerInfo,sMainApp);
             return obj;
         }
 

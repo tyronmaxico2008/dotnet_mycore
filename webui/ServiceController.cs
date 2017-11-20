@@ -19,7 +19,6 @@ namespace webui
 
         Dictionary<string, NTier.Request.iBussinessTier> clnTier = new Dictionary<string, NTier.Request.iBussinessTier>();
 
-
         NTier.Request.iBussinessTier __tier;
 
         protected NTier.Request.iBussinessTier _tier
@@ -28,22 +27,22 @@ namespace webui
             {
                 if (__tier == null)
                 {
-                    __tier = NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, AppName), AppName);
+                    __tier = NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, AppName),AppName);
                 }
 
                 return __tier;
             }
         }
 
-        protected NTier.Request.iBussinessTier getTier(string sAppName)
+        protected NTier.Request.iBussinessTier getTier(string sOtherLibApp)
         {
-
-            if (!clnTier.ContainsKey(sAppName))
+            if (!clnTier.ContainsKey(sOtherLibApp))
             {
-                clnTier.Add(sAppName, NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, sAppName), AppName));
+                clnTier.Add(sOtherLibApp, NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, sOtherLibApp), AppName));
             }
-            return clnTier[sAppName];
+            return clnTier[sOtherLibApp];
         }
+
 
         public void addParamFromPost(clsCmd cmd, FormCollection frm)
         {
@@ -105,7 +104,7 @@ namespace webui
 
 
 
-
+        /*
         public ActionResult ViewPDF()
         {
             string sIndex = Request.QueryString[0];
@@ -120,6 +119,7 @@ namespace webui
 
             return File(System.IO.File.ReadAllBytes(sPath), "application/pdf");
         }
+         */
 
 
         int _start = 0;
@@ -195,8 +195,6 @@ namespace webui
             return oRequestPathInfo;
         }
 
-
-        
         public ContentResult getdataAll(FormCollection frm)
         {
 
@@ -206,21 +204,27 @@ namespace webui
             string spath = Request.QueryString["path"];
             clsRequestInfo oRequestInfo = getRequestPathInfo(spath);
 
-
+            
             DataTable t = null;
-
+            clsMsg result;
             if (oRequestInfo.Path.StartsWith("drp\\"))
-                t = getTier(oRequestInfo.appName).getDropDownData(oRequestInfo.Path.Substring(4), cmd).Obj as DataTable;
+            {
+                result = getTier(oRequestInfo.appName).getDropDownData(oRequestInfo.Path.Substring(4), cmd);
+            }
             else
-                t = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd).Obj as DataTable;
-
+            {
+                result = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd);
+            }
+            t = result.Obj as DataTable;
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(t), "application/json");
+
+
         }
 
 
 
         //this is not required later on delete this code.
-
+        /*
         public ContentResult getdataPaging_vue(FormCollection frm)
         {
             
@@ -251,7 +255,7 @@ namespace webui
             }
 
         }
-
+        */
 
         public ContentResult getdataPaging(FormCollection frm)
         {
@@ -268,6 +272,7 @@ namespace webui
             }
 
             var result = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd);
+
             if (result.Validated)
             {
                 //var t = _tier.getData(sPath, cmd).Obj as DataTable;
@@ -457,35 +462,69 @@ namespace webui
             string sData = System.IO.File.ReadAllText("d:\\appServer\\webResource\\ng-views\\" + sPath);
             return Content(sData, "text/html");
         }
-        private string getContentType(string sFilePath)
+
+        [NonAction]
+        private ActionResult getContentType(string sFilePath)
         {
             string sExtension = System.IO.Path.GetExtension(sFilePath);
 
+            string sContentType = "";
             switch (sExtension.ToLower())
             {
                 case ".js":
-                    return "text/javascript";
+                    sContentType =  "text/javascript";
+                    break;
                 case ".html":
                 case ".htm":
-                    return "text/html";
+                    sContentType = "text/html";
+                    break;
                 case ".pdf":
-                    return "application/pdf";
+                    sContentType = "application/pdf";
+                    break;
+                case ".css":
+                    sContentType = "text/css";
+                    break;
+                case ".xml":
+                    sContentType = "text/xml";
+                    break;
                 default:
-                    return "application/unknown";
+                    sContentType = "application/unknown";
+                    break;
             }
+
+
+
+
+            switch (sExtension.ToLower())
+            { 
+                case ".pdf":
+                    return File(System.IO.File.ReadAllBytes(sFilePath),sContentType);
+                default:
+                    return Content(System.IO.File.ReadAllText(sFilePath), sContentType);
+            }
+
         }
 
-        public ActionResult appContent()
+        public ActionResult appServiceContent()
         {
-            //string sPath = ui.getAssetAppPath() +  Request.QueryString["path"];
-            string sFilePath = ui.getAssetAppFolderPath() + "\\" + Request.QueryString["path"];
-            byte[] data = System.IO.File.ReadAllBytes(sFilePath);
-
-            if (System.IO.Path.GetExtension(sFilePath) == ".js")
-                return JavaScript(System.IO.File.ReadAllText(sFilePath));
-
-            return File(data, getContentType(sFilePath));
+            string qPath  = Request.QueryString["path"];
+            qPath = qPath.Replace("/", "\\");
+            string sPath = ui.appServicePath + qPath;
+            return getContentType(sPath);
         }
+
+        //public ActionResult appContent()
+        //{
+        //    //string sPath = ui.getAssetAppPath() +  Request.QueryString["path"];
+
+        //    string sFilePath = ui.getAssetAppFolderPath() + "\\" + Request.QueryString["path"];
+        //    byte[] data = System.IO.File.ReadAllBytes(sFilePath);
+
+        //    if (System.IO.Path.GetExtension(sFilePath) == ".js")
+        //        return JavaScript(System.IO.File.ReadAllText(sFilePath));
+
+        //    return File(data, getContentType(sFilePath));
+        //}
 
     }
 }

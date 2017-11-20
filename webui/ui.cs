@@ -10,93 +10,55 @@ namespace System
     public static class ui
     {
 
-        public static string getCookie(string sKey)
+        public static string appServicePath
         {
-            return "";            
+            get { return Configuration.ConfigurationManager.AppSettings["appServicePath"]; }
         }
 
-        internal static string getAssetLink()
+        public static string assets_global_link
         {
-            return Configuration.ConfigurationManager.AppSettings["assetLink"];
-        }
-
-        internal static string getAppServerRootPath()
-        {
-
-            string sFolder = Configuration.ConfigurationManager.AppSettings["appServerRootPath"];
-
-            if(sFolder == "~")
+            get
             {
-                sFolder=  HttpContext.Current.Server.MapPath("~/AppServer");
+
+                if (!Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("assets_global_link"))
+                    return "";
+                else
+                    return Configuration.ConfigurationManager.AppSettings["assets_global_link"];
             }
 
-            return sFolder;
-        }
-        
-        internal static string getAssetAppFolderPath()
-        {
-            string sFolder = Configuration.ConfigurationManager.AppSettings["assetAppPath"];
-
-            return sFolder;
-        }
-        
-
-        internal static string getAppSettings(string sKey)
-        {
-            return Configuration.ConfigurationManager.AppSettings[sKey];
-        }
-        internal static string getAppName()
-        {
-            return Configuration.ConfigurationManager.AppSettings["appName"];
         }
 
-        public static string assetUrl(string additionalUrl)
+        public static MvcHtmlString sharedWebContent(string sAdditionalUrl)
         {
-
-            return  getAssetLink() + additionalUrl;
-        }
-
-        public static string assetAppUrl(string additionalUrl)
-        {
-
-            return "../Service/appContent?path=" + additionalUrl;
-        }
-
-        public static MvcHtmlString headerInclude()
-        {
-            string sPath = getAppServerRootPath() + "\\webResource\\headerInclude.html"; 
-            
-            StringBuilder sb1 = new StringBuilder(System.IO.File.ReadAllText(sPath));
-            sb1.Replace("[assets]",getAssetLink());
-
-            return new MvcHtmlString(sb1.ToString());
-
-        }
-
-        public static MvcHtmlString appContent(string sAdditionalUrl)
-        {
-            string sPath = getAssetAppFolderPath() + sAdditionalUrl;
- 
+            string sPath = appServicePath + "\\web\\" + sAdditionalUrl.Replace("/", "\\");
             return new MvcHtmlString(System.IO.File.ReadAllText(sPath));
         }
 
 
-        private static NTier.Request.iBussinessTier __tier;
-
-        internal static NTier.Request.iBussinessTier oTier
+        public static string url_admin(string addUrl)
         {
-            get
+            return "../Service/appServiceContent?path=" + "/web" + addUrl;
+        }
+
+        public static string url_global(string addUrl)
+        {
+            if (assets_global_link.isEmpty() == false)
             {
-                if (__tier == null)
-                {
-                    __tier = NTier.Request.utility.createBussinessTierFromXmlForWeb(new NTier.clsAppServerInfo(ui.getAppServerRootPath(), ui.getAppName()));
-                }
-                return __tier;
+                return assets_global_link + addUrl.Replace("\\", "/");
+            }
+            else
+            {
+                return "../Service/appServiceContent?path=" + "/web/global" + addUrl;
             }
         }
-       
+
+
+        
+
+
+
 
     }
+
+
 }
-
-

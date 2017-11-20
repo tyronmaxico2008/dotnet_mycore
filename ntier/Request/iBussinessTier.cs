@@ -8,9 +8,10 @@ using DAL;
 namespace NTier.Request
 {
 
+    
+
     public interface iBussinessTier
     {
-
         string getAppSetting(string sKey);
         void setCookie(string sKey, string sVal);
         string getCookie(string sKey);

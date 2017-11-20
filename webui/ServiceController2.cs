@@ -13,7 +13,7 @@ namespace webui
         }
         public override string AppServerRootPath
         {
-            get { return ui.getAppServerRootPath(); }
+            get { return ui.appServicePath + "\\AppServer"; }
         }
         
     }

@@ -37,7 +37,6 @@ namespace NTier.Request
             var xDocParent = new XmlDocument();
             var xDoc = new XmlDocument();
             string sPath = _appServerInfo.getAppConfigFilePath();
-
             if (System.IO.File.Exists(sPath))
                 xDoc.Load(_appServerInfo.getAppConfigFilePath());
 
@@ -54,9 +53,14 @@ namespace NTier.Request
 
             setCRUD(xDoc);
             setCRUD(xDocParent);
+            
 
             setGetData(xDoc);
             setGetData(xDocParent);
+            
+            setDropDown(xDoc);
+            setDropDown(xDocParent);
+
 
             setCMD(xDoc);
             setCMD(xDocParent);
@@ -197,7 +201,7 @@ namespace NTier.Request
                     obj.orderBy = xNode.getXmlText("orderby");
                     obj.setTier(this);
 
-                    clnGetData.Add(sKey, obj);
+                    cln.Add(sKey, obj);
 
                     break;
 
@@ -213,7 +217,7 @@ namespace NTier.Request
                     objOther.func = sFunc;
                     objOther.setTier(this);
 
-                    clnGetData.Add(sKey, objOther);
+                    cln.Add(sKey, objOther);
                     break;
                 case "sql":
                     string sSQL = xNode.getXmlText("sql");
@@ -221,7 +225,7 @@ namespace NTier.Request
                     var objSQL = new NTier.Request.clsRequestGetData_sql(_adapter);
                     objSQL.sql = sSQL;
                     objSQL.setTier(this);
-                    clnGetData.Add(sKey, objSQL);
+                    cln.Add(sKey, objSQL);
                     break;
             }
         }
@@ -485,12 +489,13 @@ namespace NTier.Request
 
         public clsMsg getDropDownData(string sPath, clsCmd cmd)
         {
-            if (!clnGetData.ContainsKey(sPath))
+            if (!clnDropDown.ContainsKey(sPath))
             {
                 throw new Exception(string.Format("Path key [{0}]not found !", sPath));
             }
 
-            var obj = clnGetData[sPath];
+
+            var obj = clnDropDown[sPath];
             return obj.getData(cmd);
         }
 
