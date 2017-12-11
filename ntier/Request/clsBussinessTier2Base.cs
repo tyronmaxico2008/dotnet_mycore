@@ -9,12 +9,8 @@ using System.Web;
 namespace NTier.Request
 {
 
-
-
-    public class clsBussinessTier2 : iBussinessTier
+    internal abstract class clsBussinessTier2Base : iBussinessTier
     {
-
-
 
         private myAssembly oAssembly = new myAssembly();
 
@@ -29,9 +25,15 @@ namespace NTier.Request
         Dictionary<string, NTier.Request.clsRequestSQLReportBase> clnSQLReport = new Dictionary<string, clsRequestSQLReportBase>();
         Dictionary<string, NTier.Request.clsRequestFileData_Base> clnFileData = new Dictionary<string, clsRequestFileData_Base>();
 
-        public clsBussinessTier2(clsAppServerBase appServerInfo
+
+        public abstract void setCookie(string sKey, string sValue);
+        public abstract string getCookie(string sKey);
+
+        public clsBussinessTier2Base(clsAppServerBase appServerInfo
             , string sMainApp)
         {
+
+
             _appServerInfo = appServerInfo;
 
             var xDocParent = new XmlDocument();
@@ -53,11 +55,11 @@ namespace NTier.Request
 
             setCRUD(xDoc);
             setCRUD(xDocParent);
-            
+
 
             setGetData(xDoc);
             setGetData(xDocParent);
-            
+
             setDropDown(xDoc);
             setDropDown(xDocParent);
 
@@ -184,7 +186,7 @@ namespace NTier.Request
 
 
 
-        private void tmp(XmlNode xNode,Dictionary<string, NTier.Request.clsRequestGetDataBase> cln )
+        private void tmp(XmlNode xNode, Dictionary<string, NTier.Request.clsRequestGetDataBase> cln)
         {
             string sType = xNode.getXmlAttributeValue("type");
             string sKey = xNode.getXmlAttributeValue("name");
@@ -299,7 +301,7 @@ namespace NTier.Request
             }
         }
 
-        
+
         private void setSQLReport(XmlDocument xDoc)
         {
             if (xDoc == null) return;
@@ -446,26 +448,6 @@ namespace NTier.Request
         public string getAppSetting(string sKey)
         {
             return clnAppSettings[sKey];
-        }
-
-        public void setCookie(string sKey, string sValue)
-        {
-            HttpCookie myUserCookie = new HttpCookie(sKey);
-
-            myUserCookie.Value = sValue;
-
-            //if (_AppName.isEmpty() == false)
-            //    myUserCookie.Path = "~/apps/" + _AppName;
-
-            HttpContext.Current.Response.Cookies.Add(myUserCookie);
-        }
-
-        public string getCookie(string sKey)
-        {
-            if (HttpContext.Current.Request.Cookies.AllKeys.Contains(sKey))
-                return HttpContext.Current.Request.Cookies[sKey].Value;
-            else
-                return "";
         }
 
 

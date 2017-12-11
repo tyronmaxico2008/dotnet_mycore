@@ -19,3 +19,5 @@ D:\proj2\core\winui\obj\Debug\winui.exe
 D:\proj2\core\winui\obj\Debug\winui.pdb
 D:\proj2\core\winui\obj\Debug\winui.appConfig.frmConnectionString.resources
 D:\proj2\core\winui\obj\Debug\winui.appConfig.frmGetData.resources
+D:\proj2\core\winui\obj\Debug\winui.appConfig.frmConfig_GetData.resources
+D:\proj2\core\winui\obj\Debug\winui.frmEntry.resources

@@ -49,5 +49,17 @@ namespace winui
                
         }
 
+        private void treeDesginerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var frm = new TreeDesigner.frmTreeDesigner();
+            frm.load(ui.getTreeXmlPath());
+            frm.ShowDialog();
+
+            this.loadTree(ui.getTreeXmlPath());
+
+
+        }
+
     }
 }

@@ -10,6 +10,7 @@ using NTier.Request;
 
 namespace winui
 {
+
     public partial class frmBase : Form
     {
         public frmBase()
@@ -24,10 +25,10 @@ namespace winui
 
         }
 
-
         public void setTier(iBussinessTier oTier)
         {
             _Tier = oTier;
         }
+
     }
 }

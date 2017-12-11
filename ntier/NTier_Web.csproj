@@ -77,16 +77,19 @@
     <Compile Include="adapter\iAdapter.cs" />
     <Compile Include="adapter\utility.cs" />
     <Compile Include="clsAppServer.cs" />
-    <Compile Include="Request\clsBussinessTier2.cs" />
+    <Compile Include="Request\clsBussinessTier2Base.cs" />
+    <Compile Include="Request\clsBussinessTier2Web.cs" />
     <Compile Include="Request\clsBussinessTierFromXmlBase.cs" />
     <Compile Include="adapter\clsDataAdapter.cs" />
     <Compile Include="Request\clsBussinessTierFromXmlForWin.cs" />
+    <Compile Include="Request\clsBussinessTierRequestControllerWin.cs" />
     <Compile Include="Request\clsErrorLog.cs" />
     <Compile Include="Request\clsGetDataView.cs" />
     <Compile Include="Request\clsRequestBase.cs" />
     <Compile Include="CRUD\clsReadSimple.cs" />
     <Compile Include="CRUD\clsCRUD.cs" />
     <Compile Include="Request\clsBussinessTierFromXmlForWeb.cs" />
+    <Compile Include="Request\clsBussinessTier2Win.cs" />
     <Compile Include="Request\iBussinessTier.cs" />
     <Compile Include="Request\iConfig.cs" />
     <Compile Include="Request\iRequest.cs" />
@@ -111,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="winui\TreeDesigner\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

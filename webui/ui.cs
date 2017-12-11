@@ -34,10 +34,19 @@ namespace System
             return new MvcHtmlString(System.IO.File.ReadAllText(sPath));
         }
 
+        private static string getServiceControllerLink()
+        {
+            if (Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("Service_Controller_Link"))
+            {
+                return Configuration.ConfigurationManager.AppSettings["Service_Controller_Link"];
+            }
+            else
+                return "../Service/";
+        }
 
         public static string url_admin(string addUrl)
         {
-            return "../Service/appServiceContent?path=" + "/web" + addUrl;
+            return  getServiceControllerLink() + "appServiceContent?path=" + "/web" + addUrl;
         }
 
         public static string url_global(string addUrl)
@@ -48,15 +57,19 @@ namespace System
             }
             else
             {
-                return "../Service/appServiceContent?path=" + "/web/global" + addUrl;
+                return getServiceControllerLink() +  "appServiceContent?path=" + "/web/global" + addUrl;
             }
         }
 
 
+        public static void logOut()
+        {
+            HttpContext.Current.Response.Cookies.Remove("userid");
+        }
+
+
         
-
-
-
+        
 
     }
 

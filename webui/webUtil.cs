@@ -24,6 +24,29 @@ namespace System.Web
 
         //    }
         //}
+
+        public static void setCookie(string sKey
+            , string sValue)
+        {
+            HttpCookie myUserCookie = new HttpCookie(sKey);
+            myUserCookie.Value = sValue;
+            HttpContext.Current.Response.Cookies.Add(myUserCookie);
+        }
+
+        public static string getCookie(string sKey)
+        {
+            if (HttpContext.Current.Request.Cookies.AllKeys.Contains(sKey))
+                return HttpContext.Current.Request.Cookies[sKey].Value;
+            else
+                return "";
+        }
+
+
+        public static void logOut()
+        {
+            setCookie("userid", "0");
+        }
+
     }
 
 

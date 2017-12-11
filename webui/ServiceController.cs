@@ -217,10 +217,7 @@ namespace webui
             }
             t = result.Obj as DataTable;
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(t), "application/json");
-
-
         }
-
 
 
         //this is not required later on delete this code.
@@ -335,7 +332,6 @@ namespace webui
                 try
                 {
                     var rpt = getTier(oRequestInfo.appName).getSQLReport(oRequestInfo.Path, cmd);
-
                     Session["rpt"] = rpt;
                     Session["rptName"] = rpt.downloadName.isEmpty() ? sPath : rpt.downloadName;
                     return Json(new { msg = "", data = "" }, JsonRequestBehavior.AllowGet);

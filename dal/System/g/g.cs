@@ -235,14 +235,25 @@ namespace System
 
         public static clsMsg msg_exception(Exception ex)
         {
+            StringBuilder sb1 = new StringBuilder();
+            int i=0;
+            Exception ex1 =ex;
+            do
+            {
+                if (ex1 != null)
+                {
+                    string str1 = new String('.', (3 * i));
+                    sb1.AppendFormat("{0} : {1} \n", str1, ex1.Message);
+                    i++;
 
-            if (ex.InnerException != null)
-                return g.msg(ex.InnerException.Message);
-            else
-                return g.msg(ex.Message);
+                    ex1 = ex1.InnerException;
+                }
 
+            } while (ex1 != null);
 
+            return g.msg(sb1.ToString());
         }
+
         public static bool isDate(string sDate, string sFormat)
         {
 
@@ -300,8 +311,8 @@ namespace System
                 iCount = e.Count();
                 eDataForJson = e.Skip(iStart).Take(ilength);
             }
-                
-            return new {  recordsTotal = iCount, recordsFiltered = iCount, data = eDataForJson, error = false, error_msg = "" };
+
+            return new { recordsTotal = iCount, recordsFiltered = iCount, data = eDataForJson, error = false, error_msg = "" };
         }
 
         //public static List<Dictionary<string, object>> GetTableRows(DataTable dtData)
@@ -324,6 +335,27 @@ namespace System
         //    return lstRows;
 
         //}
+
+
+
+        public static List<Dictionary<string, object>> GetTableRows(DataRow r)
+        {
+
+            List<Dictionary<string, object>>
+            lstRows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> dictRow = null;
+
+            dictRow = new Dictionary<string, object>();
+
+            foreach (DataColumn col in r.Table.Columns)
+            {
+                dictRow.Add(col.ColumnName, r[col]);
+            }
+            lstRows.Add(dictRow);
+
+            return lstRows;
+
+        }
 
         public static List<Dictionary<string, object>> GetTableRows(DataTable dtData, int iStart, int iLength)
         {

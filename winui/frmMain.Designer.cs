@@ -38,13 +38,16 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.developerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeDesginerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.systemToolStripMenuItem});
+            this.systemToolStripMenuItem,
+            this.developerToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(797, 24);
@@ -65,18 +68,18 @@
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loginToolStripMenuItem.Text = "Login";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(101, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // statusStrip1
@@ -114,6 +117,21 @@
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
+            // developerToolStripMenuItem
+            // 
+            this.developerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.treeDesginerToolStripMenuItem});
+            this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.developerToolStripMenuItem.Text = "Developer";
+            // 
+            // treeDesginerToolStripMenuItem
+            // 
+            this.treeDesginerToolStripMenuItem.Name = "treeDesginerToolStripMenuItem";
+            this.treeDesginerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.treeDesginerToolStripMenuItem.Text = "Tree Desginer";
+            this.treeDesginerToolStripMenuItem.Click += new System.EventHandler(this.treeDesginerToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,5 +165,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolStripMenuItem developerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem treeDesginerToolStripMenuItem;
     }
 }

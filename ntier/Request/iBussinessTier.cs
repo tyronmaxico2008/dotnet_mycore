@@ -8,8 +8,6 @@ using DAL;
 namespace NTier.Request
 {
 
-    
-
     public interface iBussinessTier
     {
         string getAppSetting(string sKey);

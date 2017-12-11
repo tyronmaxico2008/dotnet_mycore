@@ -98,6 +98,7 @@ namespace System
             return frm.result;
         }
 
+
         public static string getAppName()
         {
             return Environment.GetEnvironmentVariable("appName");
@@ -134,23 +135,16 @@ namespace System
 
         public static void initApp()
         {
-
-
             initBll();
             oForms = winui.utility.formNavigator(getFormConfigXmlPath());
-            
             oForms.setTier(oTier);
         }
 
         public static void initBll()
         {
-
             var oAppServer = new NTier.clsAppServerInfo(ui.appServerRootPath, ui.appName);
-            
-            oTier = NTier.Request.utility.createBussinessTierFromXmlForWin(oAppServer);
-
+            oTier = NTier.Request.utility.createBussinessTierControllerFromXmlForWin2(oAppServer,ui.appName);
             ui.ApplicationTitle = oTier.getAppSetting("applicationTitle");
-
         }
     }
 }

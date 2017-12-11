@@ -28,7 +28,7 @@ namespace NTier.Request
                 var tFilter = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(sFilterJson);
                 foreach(DataRow rFilter in tFilter.Rows)
                 {
-                    if (rFilter["val"].ToString().isEmpty() == false)
+                    if (rFilter["val"].ToString().isEmpty() == false && rFilter["name"].ToString().isEmpty() == false )
                     {
                         var prm = cmd.setValue(rFilter["name"].ToString(), rFilter["val"].ToString());
                         prm.Operator = rFilter["operator"].ToString();
