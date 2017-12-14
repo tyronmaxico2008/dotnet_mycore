@@ -22,21 +22,21 @@ namespace System
 
             string sFolder = Configuration.ConfigurationManager.AppSettings["appServerRootPath"];
 
-            if(sFolder == "~")
+            if (sFolder == "~")
             {
-                sFolder=  HttpContext.Current.Server.MapPath("~/AppServer");
+                sFolder = HttpContext.Current.Server.MapPath("~/AppServer");
             }
 
             return sFolder;
         }
-        
+
         internal static string getAssetAppFolderPath()
         {
             string sFolder = Configuration.ConfigurationManager.AppSettings["assetAppPath"];
 
             return sFolder;
         }
-        
+
 
         internal static string getAppSettings(string sKey)
         {
@@ -50,7 +50,7 @@ namespace System
         public static string assetUrl(string additionalUrl)
         {
 
-            return  getAssetLink() + additionalUrl;
+            return getAssetLink() + additionalUrl;
         }
 
         public static string assetAppUrl(string additionalUrl)
@@ -61,10 +61,10 @@ namespace System
 
         public static MvcHtmlString headerInclude()
         {
-            string sPath = getAppServerRootPath() + "\\webResource\\headerInclude.html"; 
-            
+            string sPath = getAppServerRootPath() + "\\webResource\\headerInclude.html";
+
             StringBuilder sb1 = new StringBuilder(System.IO.File.ReadAllText(sPath));
-            sb1.Replace("[assets]",getAssetLink());
+            sb1.Replace("[assets]", getAssetLink());
 
             return new MvcHtmlString(sb1.ToString());
 

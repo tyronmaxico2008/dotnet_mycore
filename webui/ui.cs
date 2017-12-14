@@ -10,6 +10,12 @@ namespace System
     public static class ui
     {
 
+        public static string getWebAppSettings(string sKey)
+        {
+
+            return Configuration.ConfigurationManager.AppSettings[sKey];
+        }
+
         public static string appServicePath
         {
             get { return Configuration.ConfigurationManager.AppSettings["appServicePath"]; }
@@ -19,7 +25,6 @@ namespace System
         {
             get
             {
-
                 if (!Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("assets_global_link"))
                     return "";
                 else
@@ -46,7 +51,7 @@ namespace System
 
         public static string url_admin(string addUrl)
         {
-            return  getServiceControllerLink() + "appServiceContent?path=" + "/web" + addUrl;
+            return getServiceControllerLink() + "appServiceContent?path=" + "/web" + addUrl;
         }
 
         public static string url_global(string addUrl)
@@ -57,7 +62,7 @@ namespace System
             }
             else
             {
-                return getServiceControllerLink() +  "appServiceContent?path=" + "/web/global" + addUrl;
+                return getServiceControllerLink() + "appServiceContent?path=" + "/web/global" + addUrl;
             }
         }
 
@@ -68,8 +73,8 @@ namespace System
         }
 
 
-        
-        
+
+
 
     }
 
