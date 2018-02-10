@@ -12,9 +12,10 @@ namespace webui
     public abstract class ServiceControllerBase : myController
     {
 
-
+        
         public abstract string AppServerRootPath { get; }
         public abstract string AppName { get; }
+
 
 
         Dictionary<string, NTier.Request.iBussinessTier> clnTier = new Dictionary<string, NTier.Request.iBussinessTier>();

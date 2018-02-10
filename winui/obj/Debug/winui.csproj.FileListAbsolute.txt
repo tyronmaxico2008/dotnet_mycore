@@ -1,6 +1,5 @@
 D:\proj2\output\winui\winui.exe
 D:\proj2\output\winui\winui.pdb
-D:\proj2\core\winui\obj\Debug\winui.csprojResolveAssemblyReference.cache
 D:\proj2\core\winui\obj\Debug\winui.appConfig.frmMainAppConfig.resources
 D:\proj2\core\winui\obj\Debug\winui.frmLogin.resources
 D:\proj2\core\winui\obj\Debug\winui.frmMain2.resources

@@ -15,6 +15,5 @@ namespace webui
         {
             get { return ui.appServicePath + "\\AppServer"; }
         }
-        
     }
 }

@@ -21,6 +21,19 @@ namespace System
             get { return Configuration.ConfigurationManager.AppSettings["appServicePath"]; }
         }
 
+
+        public static NTier.Request.iBussinessTier createBussinessTier(string appName)
+        {
+
+            string sAppServerRootPath = ui.appServicePath + "\\AppServer";
+
+            var oTier =  NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(sAppServerRootPath, appName),appName);
+
+            return oTier;
+        }
+
+        
+
         public static string assets_global_link
         {
             get

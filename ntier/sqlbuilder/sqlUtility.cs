@@ -2,12 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using DAL;
 
 namespace NTier.sqlbuilder
 {
     public class sqlUtility
     {
+
+        public static void addFilterFromJsonString(clsCmd cmd)
+        {
+            if (cmd.ContainFields("_filter"))
+            {
+                string sFilterJson = cmd.getStringValue("_filter");
+
+                var tFilter = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(sFilterJson);
+                foreach (DataRow rFilter in tFilter.Rows)
+                {
+                    if (rFilter["val"].ToString().isEmpty() == false && rFilter["name"].ToString().isEmpty() == false)
+                    {
+                        var prm = cmd.setValue(rFilter["name"].ToString(), rFilter["val"].ToString());
+                        prm.Operator = rFilter["operator"].ToString();
+                    }
+                }
+
+                cmd.Remove(cmd["_filter"]);
+            }
+        }
+
+
         public static string getWhereCondition(clsCmd prms, params string[] sIgnoreFields)
         {
             if (prms == null) return "";

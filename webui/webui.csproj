@@ -66,6 +66,12 @@
     <Compile Include="ui_old.cs" />
     <Compile Include="webUtil.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\current\BussinessLogic\sys.bll\sys.bll.csproj">
+      <Project>{3aaa3c14-a0cf-430c-ac19-7b547926e3e2}</Project>
+      <Name>sys.bll</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
